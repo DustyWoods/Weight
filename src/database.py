@@ -8,7 +8,7 @@ class DB:
     def __init__(self, path: str):
         self.conn = sqlite3.connect(path)
 
-    def __enter__(self) -> None:
+    def __enter__(self):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -31,7 +31,7 @@ class DB:
         self.conn.execute(
             '''
             INSERT INTO weight (date, weight)
-            (?, ?)
+            VALUES (?, ?)
             ON CONFLICT(date)
             DO UPDATE SET weight = excluded.weight
             ''',
@@ -49,7 +49,7 @@ class DB:
             SELECT date, weight
             FROM weight
             WHERE date BETWEEN ? AND ?
-            ORDERED BY date
+            ORDER BY date
             ''',
             (
                 start.isoformat(),
@@ -65,7 +65,7 @@ class DB:
             '''
             SELECT date, weight
             FROM weight
-            ORDERED BY date
+            ORDER BY date
             ''',
         )
 
