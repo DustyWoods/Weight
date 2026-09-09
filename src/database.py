@@ -9,6 +9,7 @@ class DB:
         self.conn = sqlite3.connect(path)
 
     def __enter__(self):
+        self.init()
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
@@ -30,7 +31,7 @@ class DB:
         # 添加一条体重信息
         self.conn.execute(
             '''
-            INSERT INTO weight (date, weight)
+            INSERT INTO Weight (date, weight)
             VALUES (?, ?)
             ON CONFLICT(date)
             DO UPDATE SET weight = excluded.weight
@@ -47,7 +48,7 @@ class DB:
         cursor = self.conn.execute(
             '''
             SELECT date, weight
-            FROM weight
+            FROM Weight
             WHERE date BETWEEN ? AND ?
             ORDER BY date
             ''',
@@ -64,7 +65,7 @@ class DB:
         cursor = self.conn.execute(
             '''
             SELECT date, weight
-            FROM weight
+            FROM Weight
             ORDER BY date
             ''',
         )
