@@ -2,6 +2,7 @@ import argparse
 
 from .repository import Repository
 from .utils import render
+from .validtor import validate_weight
 
 class Handler:
 
@@ -11,6 +12,7 @@ class Handler:
     def handle(self, args: argparse.Namespace):
     
             if args.command == "add":
+                validate_weight(args.weight)
                 self.repository.add_today(args.weight)
             elif args.command == "show":
                 records = self.repository.recent()
