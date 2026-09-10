@@ -1,5 +1,6 @@
 import unittest
 from datetime import date
+from pathlib import Path
 
 from src.database import DB
 from src.models import WeightRecord
@@ -9,7 +10,7 @@ class TestDB(unittest.TestCase):
     def test_add(self):
         record = WeightRecord(date=date(2026, 9, 9), weight=81.1)
 
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             db.add(record)
             records = db.get_range(date(2026, 9, 9), date(2026, 9, 9))
 
@@ -19,7 +20,7 @@ class TestDB(unittest.TestCase):
         first = WeightRecord(date=date(2026, 9, 9), weight=80.2)
         second = WeightRecord(date=date(2026, 9, 9), weight=78.2)
 
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             db.add(first)
             db.add(second)
             records = db.get_range(date(2026, 9, 9), date(2026, 9, 9))
@@ -34,7 +35,7 @@ class TestDB(unittest.TestCase):
             WeightRecord(date(2026, 1, 5), 66.3),
         ]
 
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             for record in records:
                 db.add(record)
 
@@ -43,7 +44,7 @@ class TestDB(unittest.TestCase):
         self.assertEqual(result, records[1: 3])
 
     def test_get_range_empty(self):
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             result = db.get_range(date(2026, 1, 3), date(2026, 1, 4))
 
         self.assertEqual(result, [])
@@ -63,7 +64,7 @@ class TestDB(unittest.TestCase):
             WeightRecord(date(2026, 1, 5), 66.3),
         ]
 
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             for record in records:
                 db.add(record)
             result = db.get_range(date(2026, 1, 2), date(2026, 1, 5))
@@ -78,7 +79,7 @@ class TestDB(unittest.TestCase):
             WeightRecord(date(2026, 1, 5), 66.3),
         ]
 
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             for record in records:
                 db.add(record)
 
@@ -86,7 +87,7 @@ class TestDB(unittest.TestCase):
         self.assertEqual(result, records)
 
     def test_get_all_empty(self):
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             
             result = db.get_all()
         self.assertEqual(result, [])
@@ -106,7 +107,7 @@ class TestDB(unittest.TestCase):
             WeightRecord(date(2026, 1, 5), 66.3),
         ]
 
-        with DB(":memory:") as db:
+        with DB(Path(":memory:")) as db:
             for record in records:
                 db.add(record)
             result = db.get_all()

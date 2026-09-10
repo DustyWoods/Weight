@@ -1,11 +1,12 @@
 import sqlite3
 from datetime import date
+from pathlib import Path
 
 from .models import WeightRecord
 
 class DB:
 
-    def __init__(self, path: str):
+    def __init__(self, path: Path):
         self.conn = sqlite3.connect(path)
 
     def __enter__(self):

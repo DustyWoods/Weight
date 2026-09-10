@@ -1,11 +1,12 @@
 from datetime import date, timedelta
+from pathlib import Path
 
 from .database import DB
 from .models import WeightRecord
 
 class Repository:
 
-    def __init__(self, path: str):
+    def __init__(self, path: Path):
         self.path = path
 
     def add_today(self, weight: float):

@@ -1,6 +1,7 @@
 import argparse
 
 from .repository import Repository
+from .utils import render
 
 class Handler:
 
@@ -12,4 +13,5 @@ class Handler:
             if args.command == "add":
                 self.repository.add_today(args.weight)
             elif args.command == "show":
-                pass
+                records = self.repository.recent()
+                render(records)

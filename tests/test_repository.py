@@ -3,6 +3,7 @@ import tempfile
 import unittest
 from random import uniform
 from datetime import date, timedelta
+from pathlib import Path
 
 from src.repository import Repository
 from src.database import DB
@@ -13,7 +14,7 @@ class TestRepository(unittest.TestCase):
     def setUp(self):
         self.db_file = tempfile.NamedTemporaryFile(delete=False)
         self.db_file.close()
-        self.repository = Repository(self.db_file.name)
+        self.repository = Repository(Path(self.db_file.name))
 
     def tearDown(self):
         os.unlink(self.db_file.name)
@@ -34,7 +35,7 @@ class TestRepository(unittest.TestCase):
 
         records = [ WeightRecord(days[i], weights[i]) for i in range(30)]
 
-        with DB(self.db_file.name) as db:
+        with DB(Path(self.db_file.name)) as db:
             for record in records:
                 db.add(record)
 
@@ -48,7 +49,7 @@ class TestRepository(unittest.TestCase):
 
         records = [ WeightRecord(days[i], weights[i]) for i in range(30)]
 
-        with DB(self.db_file.name) as db:
+        with DB(Path(self.db_file.name)) as db:
             for record in records:
                 db.add(record)
 
