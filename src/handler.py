@@ -2,7 +2,7 @@ import argparse
 
 from .repository import Repository
 from .utils import render
-from .validtor import validate_weight
+from .validators import validate_weight
 
 class Handler:
 

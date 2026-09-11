@@ -10,7 +10,7 @@ def create_parser():
             )
     add_parser = subparsers.add_parser(
             "add",
-            help="Add today's weight record (kg; rounded to one decimal place)"
+            help="Add today's weight record (kg; rounded to one decimal place"
             )
     add_parser.add_argument(
             "weight",
