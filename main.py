@@ -1,18 +1,15 @@
-from pathlib import Path
-
 from src.parser import get_args
 from src.handler import Handler
 from src.repository import Repository
-
-
-PROJECT_ROOT = Path(__file__).resolve().parent
-DB_PATH = PROJECT_ROOT / "weight.db"
-
+from src.config import get_database_dir
 
 def main():
     args = get_args()
 
-    repository = Repository(DB_PATH)
+    db_path = get_database_dir()
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+
+    repository = Repository(db_path)
     handler = Handler(repository)
 
     handler.handle(args)
