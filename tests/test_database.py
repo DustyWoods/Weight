@@ -2,8 +2,8 @@ import unittest
 from datetime import date
 from pathlib import Path
 
-from src.database import DB
-from src.models import WeightRecord
+from weight.database import DB
+from weight.models import WeightRecord
 
 class TestDB(unittest.TestCase):
 

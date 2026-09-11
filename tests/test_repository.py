@@ -5,9 +5,9 @@ from random import uniform
 from datetime import date, timedelta
 from pathlib import Path
 
-from src.repository import Repository
-from src.database import DB
-from src.models import WeightRecord
+from weight.repository import Repository
+from weight.database import DB
+from weight.models import WeightRecord
 
 class TestRepository(unittest.TestCase):
 

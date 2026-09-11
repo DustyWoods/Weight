@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 
-from src.parser import get_args
+from weight.parser import get_args
 
 class TestParser(unittest.TestCase):
 

@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock
 
-from src.handler import Handler
+from weight.handler import Handler
 
 class TestHandler(unittest.TestCase):
 

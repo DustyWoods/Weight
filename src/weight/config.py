@@ -7,6 +7,6 @@ def get_data_dir():
     # Return the application data directory
     return Path(user_data_dir(APP_NAME))
 
-def get_database_dir():
+def get_database_path():
     # Return the database path
     return get_data_dir() / "weight.db"
