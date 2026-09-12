@@ -17,7 +17,7 @@ Weight stores records locally in SQLite and provides a simple interface for reco
 
 ### Recommended: Install from GitHub Releases
 
-Download the latest `.whl` file from the [Releases](https://github.com/DustyWoods/weight/releases) page.
+Download the latest `.whl` file from the [Releases](https://github.com/DustyWoods/Weight/releases) page.
 
 Install it with `pipx`:
 
@@ -34,7 +34,7 @@ If `pipx` is not installed, see the [official installation guide](https://pipx.p
 You can also install a specific release directly from GitHub:
 
 ```bash
-pipx install https://github.com/DustyWoods/weight/releases/download/v0.1.0/weight-0.1.0-py3-none-any.whl
+pipx install https://github.com/DustyWoods/Weight/releases/download/v0.1.0/weight-0.1.0-py3-none-any.whl
 ```
 
 ### Upgrade
@@ -88,7 +88,7 @@ This allows Weight to be used from any working directory while keeping data sepa
 Clone the repository:
 
 ```bash
-git clone https://github.com/DustyWoods/weight.git
+git clone https://github.com/DustyWoods/Weight.git
 cd weight
 ```
 
