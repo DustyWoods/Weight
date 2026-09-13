@@ -60,3 +60,20 @@ class TestRepository(unittest.TestCase):
                 result = self.repository.recent(count)
         
                 self.assertEqual(records[30-count: 30], result)
+
+    def test_clean(self):
+        days = [ date.today() - timedelta(days=i) for i in range(29, -1, -1) ]
+        weights = [ uniform(60.0, 90.0) for _ in range(30) ]
+
+        records = [ WeightRecord(days[i], weights[i]) for i in range(30)]
+
+        with DB(Path(self.db_file.name)) as db:
+            for record in records:
+                db.add(record)
+            self.repository.clean()
+            result = db.get_all()
+
+        self.assertEqual(result, [])
+
+if __name__ == "__main__":
+    unittest.main()
