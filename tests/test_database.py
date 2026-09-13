@@ -113,5 +113,23 @@ class TestDB(unittest.TestCase):
             result = db.get_all()
         self.assertEqual(result, expected)
 
+    def test_clean(self):
+        records = [
+            WeightRecord(date(2026, 1, 4), 77.3),
+            WeightRecord(date(2026, 1, 2), 80.2),
+            WeightRecord(date(2026, 1, 5), 66.3),
+            WeightRecord(date(2026, 1, 3), 79.3),
+        ]
+
+
+        with DB(Path(":memory:")) as db:
+            for record in records:
+                db.add(record)
+            db.clean()
+            result = db.get_all()
+
+        self.assertEqual(result, [])
+
+
 if __name__ == "__main__":
     unittest.main()
