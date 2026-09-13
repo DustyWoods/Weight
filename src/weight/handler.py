@@ -1,7 +1,7 @@
 import argparse
 
 from .repository import Repository
-from .utils import render
+from .utils import render, confirm_clean
 from .validators import validate_weight
 
 class Handler:
@@ -17,3 +17,8 @@ class Handler:
             elif args.command == "show":
                 records = self.repository.recent()
                 render(records)
+            elif args.command == "clean":
+                if not args.force:
+                    if not confirm_clean():
+                        return
+                self.repository.clean()
