@@ -23,3 +23,6 @@ class Repository:
             result = db.get_range(start, end)
 
         return result
+    def clean(self):
+        with DB(self.path) as db:
+            db.clean()
