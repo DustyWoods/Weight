@@ -1,4 +1,5 @@
 import argparse
+from datetime import date
 
 from .repository import Repository
 from .utils import render, confirm_clean
@@ -12,13 +13,20 @@ class Handler:
     def handle(self, args: argparse.Namespace):
     
             if args.command == "add":
-                validate_weight(args.weight)
-                self.repository.add(args.weight)
+                self._handle_add(args)
             elif args.command == "show":
-                records = self.repository.recent()
-                render(records)
+                self._handle_show(args)
             elif args.command == "clean":
-                if not args.force:
-                    if not confirm_clean():
-                        return
-                self.repository.clean()
+                self._handle_clean(args)
+
+    def _handle_add(self, args):
+        validate_weight(args.weight)
+        self.repository.add(date.today(), args.weight)
+
+    def _handle_show(self, args):
+        records = self.repository.recent()
+        render(records)
+
+    def _handle_clean(self, args):
+        if not args.force and not confirm_clean(): return
+        self.repository.clean()
