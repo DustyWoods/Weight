@@ -23,7 +23,7 @@ class TestRepository(unittest.TestCase):
         today = date.today()
         weight = 80.35
 
-        self.repository.add(weight)
+        self.repository.add(date.today(), weight)
 
         result = self.repository.recent(1)
 
@@ -37,7 +37,7 @@ class TestRepository(unittest.TestCase):
         records = [ WeightRecord(days[i], weights[i]) for i in range(30)]
 
         for weight, day in zip(weights, days):
-            self.repository.add(weight, day)
+            self.repository.add(day, weight)
 
         result = self.repository.recent()
 
