@@ -20,7 +20,7 @@ def create_parser():
             )
     add_parser.add_argument(
             "-d",
-            "--day",
+            "--date",
             type=str,
             help="Record date in YYYY-MM-DD format (default: today)"
             )

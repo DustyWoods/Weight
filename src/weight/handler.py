@@ -3,7 +3,7 @@ from datetime import date
 
 from .repository import Repository
 from .utils import render, confirm_clean
-from .validators import validate_weight
+from .validators import validate_weight, validate_date
 
 class Handler:
 
@@ -20,8 +20,9 @@ class Handler:
                 self._handle_clean(args)
 
     def _handle_add(self, args):
+        _date = validate_date(args.date) if args.date else date.today()
         validate_weight(args.weight)
-        self.repository.add(date.today(), args.weight)
+        self.repository.add(_date, args.weight)
 
     def _handle_show(self, args):
         records = self.repository.recent()
@@ -30,3 +31,4 @@ class Handler:
     def _handle_clean(self, args):
         if not args.force and not confirm_clean(): return
         self.repository.clean()
+        print("All records deleted")
