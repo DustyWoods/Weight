@@ -18,6 +18,12 @@ def create_parser():
             "weight",
             type=float
             )
+    add_parser.add_argument(
+            "-d",
+            "--day",
+            type=str,
+            help="Record date in YYYY-MM-DD format (default: today)"
+            )
 
     subparsers.add_parser(
             "show",
