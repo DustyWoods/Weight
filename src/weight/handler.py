@@ -13,7 +13,7 @@ class Handler:
     
             if args.command == "add":
                 validate_weight(args.weight)
-                self.repository.add_today(args.weight)
+                self.repository.add(args.weight)
             elif args.command == "show":
                 records = self.repository.recent()
                 render(records)
