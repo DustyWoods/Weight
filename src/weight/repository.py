@@ -9,8 +9,8 @@ class Repository:
     def __init__(self, path: Path):
         self.path = path
 
-    def add_today(self, weight: float):
-        record = WeightRecord(date.today(), round(weight, 1))
+    def add(self, weight: float, date: date = date.today()):
+        record = WeightRecord(date, round(weight, 1))
         
         with DB(self.path) as db:
             db.add(record)
