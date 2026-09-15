@@ -39,18 +39,24 @@ class TestHandler(unittest.TestCase):
                 self.repository.add.assert_called_once_with(case["_date"], case["weight"])
 
     @patch("weight.handler.render")
-    def test_show(self, mock_render):
+    @patch("weight.handler.validate_recent")
+    def test_show(self, mock_validate_recent, mock_render):
         records = []
         self.repository.recent.return_value = records
 
         args = Namespace(
-            command = "show"
+            command = "show",
+            recent = 30,
+            no_lines = False,
+            no_data = False,
+            no_graph = False,
         )
 
         self.handler.handle(args)
 
-        self.repository.recent.assert_called_once_with()
-        mock_render.assert_called_once_with(records)
+        mock_validate_recent.assert_called_once_with(args.recent)
+        self.repository.recent.assert_called_once_with(args.recent)
+        mock_render.assert_called_once_with(records, days=args.recent, flag_lines=not args.no_lines, flag_data=not args.no_data, flag_graph=not args.no_graph)
 
     @patch("weight.handler.confirm_clean")
     def test_clean(self, mock_confirm_clean):
