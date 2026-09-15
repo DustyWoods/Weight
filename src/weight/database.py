@@ -72,3 +72,12 @@ class DB:
         )
 
         return [ WeightRecord(date=date.fromisoformat(row[0]), weight=row[1]) for row in cursor]
+    def clean(self):
+        # Clean all the data in the database
+        self.conn.execute(
+            '''
+            DELETE FROM weight
+            ''',
+        )
+
+        self.conn.commit()
