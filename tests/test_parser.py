@@ -40,6 +40,60 @@ class TestParser(unittest.TestCase):
             {
                 "argv" : [ "weight", "show"],
                 "command" : "show",
+                "recent" : 30,
+                "no-lines" : False,
+                "no-data" : False,
+                "no-graph" : False,
+            },
+            {
+                "argv" : [ "weight", "show", "-r", "13" ],
+                "command" : "show",
+                "recent" : 13,
+                "no-lines" : False,
+                "no-data" : False,
+                "no-graph" : False,
+            },
+            {
+                "argv" : [ "weight", "show", "--recent", "12" ],
+                "command" : "show",
+                "recent" : 12,
+                "no-lines" : False,
+                "no-data" : False,
+                "no-graph" : False,
+            },
+            {
+                "argv" : [ "weight", "show", "--no-lines" ],
+                "command" : "show",
+                "recent" : 30,
+                "no-lines" : True,
+                "no-data" : False,
+                "no-graph" : False,
+            },
+            {
+                "argv" : [ "weight", "show", "--no-data" ],
+                "command" : "show",
+                "recent" : 30,
+                "no-lines" : False,
+                "no-data" : True,
+                "no-graph" : False,
+ 
+            },
+            {
+                "argv" : [ "weight", "show", "--no-graph" ],
+                "command" : "show",
+                "recent" : 30,
+                "no-lines" : False,
+                "no-data" : False,
+                "no-graph" : True,
+ 
+            },
+            {
+                "argv" : [ "weight", "show", "--recent", "11", "--no-lines", "--no-data", "--no-graph" ],
+                "command" : "show",
+                "recent" : 11,
+                "no-lines" : True,
+                "no-data" : True,
+                "no-graph" : True,
             },
             {
                 "argv" : [ "weight", "clean" ],
@@ -68,6 +122,14 @@ class TestParser(unittest.TestCase):
                     self.assertEqual(args.weight, float(case["weight"]))
                 if "date" in case:
                     self.assertEqual(args.date, case["date"])
+                if "recent" in case:
+                    self.assertEqual(args.recent, case['recent'])
+                if "no-lines" in case:
+                    self.assertEqual(args.no_lines, case["no-lines"])
+                if "no-data" in case:
+                    self.assertEqual(args.no_data, case["no-data"])
+                if "no-graph" in case:
+                    self.assertEqual(args.no_graph, case["no-graph"])
                 if "force" in case:
                     self.assertEqual(args.force, case["force"])
 
