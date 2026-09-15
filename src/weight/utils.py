@@ -5,9 +5,9 @@ from datetime import datetime
 
 from .models import WeightRecord
 
-def render(records: list[WeightRecord], days = 30, flag_line = True, flag_data = True, flag_graph = True):
+def render(records: list[WeightRecord], days = 30, flag_lines = True, flag_data = True, flag_graph = True):
     if flag_graph:
-        _graph(records, flag_line)
+        _graph(records, flag_lines)
     if flag_data:
         weights = [ record.weight for record in records ]
         _data(weights, days)
@@ -33,7 +33,7 @@ def confirm_clean(times: int = 3):
 
     return False
 
-def _graph(records, flag_line=True):
+def _graph(records, flag_lines=True):
 
     date = [ datetime.combine(record.date, datetime.min.time()) for record in records ]
     weight = [ record.weight for record in records ]
@@ -47,7 +47,7 @@ def _graph(records, flag_line=True):
     fig.plot_size(width, height)
     fig.date("x").activate(form="%Y-%m-%d")
 
-    if flag_line:
+    if flag_lines:
         signal1 = fig.signal(date, weight, marker=plt.marker("braille", pixel="white")).lines()
         fig.draw(signal1)
 
@@ -64,7 +64,7 @@ def _data(weights, n_days):
     minimum = min(weights, default=-1)
     average = sum(weights) / count if count else -1
     med = median(weights) if count else -1
-    change = weights[-1] - weights[-2]
+    change = weights[-1] - weights[-2] if count > 1 else 0.0
     print()
     print(f"Overview in the past {n_days} days ({count} records):")
     print(f"\tMaximum: {maximum:.1f} kg")

@@ -27,7 +27,7 @@ class Handler:
     def _handle_show(self, args):
         validate_recent(args.recent)
         records = self.repository.recent(args.recent)
-        render(records, days = args.recent, flag_line=not args.no_line, flag_data=not args.no_data, flag_graph=not args.no_graph)
+        render(records, days = args.recent, flag_lines=not args.no_lines, flag_data=not args.no_data, flag_graph=not args.no_graph)
 
     def _handle_clean(self, args):
         if not args.force and not confirm_clean(): return
