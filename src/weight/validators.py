@@ -34,7 +34,7 @@ def validate_date(value: str) -> date:
         M-DD
         M-D
         MM-D
-        D
+        D 
         DD
 
     Missing year/month are filled using today date
@@ -73,3 +73,16 @@ def validate_date(value: str) -> date:
         return date(year, month, day)
     except ValueError as exc:
         raise ValueError(f"Invalid date: {value}") from exc
+
+def validate_recent(value: int) -> None:
+    '''
+    Validate the 'recent' value
+
+    Raise:
+        ValueError: If the value is minus or too high (1_000_000_000)
+    '''
+
+    if not 0 < value < 1_000_000_000:
+        raise ValueError(
+                f"Invalid number: {value}.\nExpect a number meaning how many recent days to query."
+        )
