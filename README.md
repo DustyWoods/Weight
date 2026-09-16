@@ -2,14 +2,18 @@
 
 A lightweight command-line tool for tracking daily weight.
 
-Weight stores records locally in SQLite and provides a simple interface for recording and viewing weight data.
+Weight stores records locally in SQLite and provides a simple interface for recording, viewing, and managing weight data.
 
 ## Features
 
-- Add today's weight
-- Update today's existing record
-- Store data in a local SQLite database
-- View recorded weight data
+- Add or update daily weight records
+- Record weight for a specific date
+- View recent weight records
+- Display weight statistics
+- Display a terminal line graph
+- Customize the number of recent days
+- Customize graph display
+- Clear stored records
 - Run from any working directory
 - Lightweight and easy to install
 
@@ -17,126 +21,101 @@ Weight stores records locally in SQLite and provides a simple interface for reco
 
 ### Recommended: Install from GitHub Releases
 
-Download the latest `.whl` file from the [Releases](https://github.com/DustyWoods/Weight/releases) page.
+Download the latest `.whl` file from [GitHub Releases](https://github.com/DustyWoods/weight/releases).
 
-Install it with `pipx`:
+Install it with:
 
 ```bash
-pipx install weight-0.1.0-py3-none-any.whl
+pipx install weight-1.0.0-py3-none-any.whl
 ```
 
-After installation, the `weight` command will be available in your terminal.
-
-If `pipx` is not installed, see the [official installation guide](https://pipx.pypa.io/stable/installation/).
-
-### Install a Release Directly
-
-You can also install a specific release directly from GitHub:
+Alternatively:
 
 ```bash
-pipx install https://github.com/DustyWoods/Weight/releases/download/v0.1.0/weight-0.1.0-py3-none-any.whl
-```
-
-### Upgrade
-
-Download the newer wheel from the Releases page and install it:
-
-```bash
-pipx install --force weight-0.2.0-py3-none-any.whl
-```
-
-### Uninstall
-
-```bash
-pipx uninstall weight
+python -m pip install weight-1.0.0-py3-none-any.whl
 ```
 
 ## Usage
 
-### Add Today's Weight
+### Add weight
+
+Add today's weight:
 
 ```bash
-weight add 68.5
+weight add 65.5
 ```
 
-If a record already exists for today, it will be updated.
+Add or update weight for a specific date:
 
-### Show Weight Records
+```bash
+weight add 65.5 --date 2026-09-16
+```
+
+### Show weight
+
+Show recent weight records:
 
 ```bash
 weight show
 ```
 
-### Get Help
+Show records from the last 7 days:
 
 ```bash
-weight --help
-weight add --help
-weight show --help
+weight show --recent 7
+```
+
+Hide connecting lines in the graph:
+
+```bash
+weight show --no-lines
+```
+
+Hide statistical data:
+
+```bash
+weight show --no-data
+```
+
+Hide the graph:
+
+```bash
+weight show --no-graph
+```
+
+### Clean records
+
+Clear all stored weight records:
+
+```bash
+weight clean
+```
+
+Skip the confirmation prompt:
+
+```bash
+weight clean --force
 ```
 
 ## Data Storage
 
-Weight uses SQLite to store weight records locally.
+Weight stores data in a platform-specific user data directory using
+[platformdirs](https://github.com/tox-dev/platformdirs).
 
-The database is stored in a user-specific data directory rather than in the directory from which the command is executed.
-
-This allows Weight to be used from any working directory while keeping data separate from the project source code.
+The database location follows the conventions of the operating system,
+so Weight can be used across Linux, macOS, and Windows.## Development
 
 ## Development
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/DustyWoods/Weight.git
+git clone https://github.com/DustyWoods/weight.git
 cd weight
 ```
 
-Install the project in editable mode:
-
-```bash
-pip install -e .
-```
-
-Install development dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Run the test suite:
-
-```bash
-python -m unittest discover
-```
-
-## Project Structure
-
-```text
-Weight/
-├──  pyproject.toml             # Project metadata and build configuration
-├──  README.md
-├──  requirements.txt           # Development dependencies
-├──  src
-│   └──  weight
-│       ├──  __init__.py
-│       ├──  __main__.py        # Application entry point
-│       ├──  config.py          # Configuration and path management
-│       ├──  database.py        # Database operations
-│       ├──  handler.py         # Command handling
-│       ├──  models.py          # Data models
-│       ├──  parser.py          # Command-line argument parsing
-│       ├──  repository.py      # Data access layer
-│       ├──  utils.py           # Data rendering and visualization
-│       └──  validators.py      # Data validators
-└──  tests/                     # Unit tests
-```
-
-## Requirements
-
-- Python 3.14
-- SQLite
+Install the development dependencies and run the project according to the development setup.
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
