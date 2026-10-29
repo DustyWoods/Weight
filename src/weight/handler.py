@@ -12,12 +12,12 @@ class Handler:
 
     def handle(self, args: argparse.Namespace):
     
-            if args.command == "add":
-                self._handle_add(args)
-            elif args.command == "show":
-                self._handle_show(args)
-            elif args.command == "clean":
-                self._handle_clean(args)
+        if args.command == "add":
+            self._handle_add(args)
+        elif args.command == "show":
+            self._handle_show(args)
+        elif args.command == "clean":
+            self._handle_clean(args)
 
     def _handle_add(self, args):
         _date = validate_date(args.date) if args.date else date.today()

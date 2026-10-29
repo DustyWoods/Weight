@@ -42,7 +42,7 @@ def _graph(records, flag_lines=True):
     fig.clear()
 
     width = shutil.get_terminal_size().columns * 0.8
-    height = 20
+    height = shutil.get_terminal_size().lines * 0.4
 
     fig.plot_size(width, height)
     fig.date("x").activate(form="%Y-%m-%d")

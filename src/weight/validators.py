@@ -72,7 +72,7 @@ def validate_date(value: str) -> date:
     try:
         return date(year, month, day)
     except ValueError as exc:
-        raise ValueError(f"Invalid date: {value}") from exc
+        raise ValueError(f"Invalid date '{value}'") from exc
 
 def validate_recent(value: int) -> None:
     '''
@@ -84,5 +84,5 @@ def validate_recent(value: int) -> None:
 
     if not 0 < value < 1_000_000_000:
         raise ValueError(
-                f"Invalid number: {value}.\nExpect a number meaning how many recent days to query."
+            f"Invalid number '{value}'.\nExpect a number meaning how many recent days to query."
         )
