@@ -26,15 +26,8 @@ Download the latest `.whl` file from [GitHub Releases](https://github.com/DustyW
 Install it with:
 
 ```bash
-pipx install weight-1.0.0-py3-none-any.whl
+pipx install ...
 ```
-
-Alternatively:
-
-```bash
-python -m pip install weight-1.0.0-py3-none-any.whl
-```
-
 ## Usage
 
 ### Add weight
