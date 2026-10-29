@@ -7,12 +7,16 @@ def main():
     args = get_args()
 
     db_path = get_database_path()
-    db_path.parent.mkdir(parents=True, exist_ok=True)
+    if not db_path.parent.exists():
+        db_path.parent.mkdir(parents=True, exist_ok=True)
 
     repository = Repository(db_path)
     handler = Handler(repository)
 
-    handler.handle(args)
+    try:
+        handler.handle(args)
+    except ValueError as exc:
+        print(f"Error: {exc}")
 
 
 if __name__ == "__main__":

@@ -1,8 +1,16 @@
 import argparse
+from importlib.metadata import version
 
 def create_parser():
     parser = argparse.ArgumentParser(
         description="Weight Tracking Tool"
+    )
+
+    parser.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version=f"%(prog)s {version('weight')}"
     )
 
     subparsers = parser.add_subparsers(
